@@ -39,7 +39,9 @@ public class Main {
         int shift = -1;
 
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
-        HashMap<Letter, Letter> caesarCipher = new HashMap<>();
+        HashMap<Letter, Letter> cipher = new HashMap<>();
+        HashMap<Letter, Letter> decipher = new HashMap<>();
+
         for (int i = 0; i < alphabet.length(); i++) {
 
             while (shift < 0) {
@@ -48,13 +50,22 @@ public class Main {
 
             }
 
-            caesarCipher.put(new Letter(alphabet.charAt(i)), new Letter(alphabet.charAt((i + shift) % 26)));
+            cipher.put(new Letter(alphabet.charAt(i)), new Letter(alphabet.charAt((i + shift) % 26)));
+
+        }
+        for (int i = 0; i < alphabet.length(); i++) {
+
+            decipher.put(new Letter(alphabet.charAt((i + shift) % 26)), new Letter(alphabet.charAt(i)));
 
         }
 
-        String cipherText = cipher(caesarCipher, text);
+        String cipherText = cipher(cipher, text);
         System.out.println(text);
         System.out.println(cipherText);
+
+        String decipherText = cipher(decipher, cipherText);
+        System.out.println(text);
+        System.out.println(decipherText);
 
     }
 
