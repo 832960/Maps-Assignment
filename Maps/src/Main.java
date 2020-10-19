@@ -54,12 +54,14 @@ public class Main {
                          Character.toLowerCase(text.charAt(i)) == caesarCipher.get(l).letter) {
 
                     decipherText.append(Character.toUpperCase(l.letter));
+                    break;
 
                 }
 
                 else if (text.charAt(i) == caesarCipher.get(l).letter) {
 
                     decipherText.append(l.letter);
+                    break;
 
                 }
 
