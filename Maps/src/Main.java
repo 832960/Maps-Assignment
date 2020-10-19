@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Main {
 
@@ -33,15 +34,50 @@ public class Main {
 
     }
 
+    public static String decipher(HashMap<Letter, Letter> caesarCipher, String text) {
+
+        StringBuilder decipherText = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+
+            Iterator<Letter> letterIterator = caesarCipher.keySet().iterator();
+            while (letterIterator.hasNext()) {
+
+                Letter l = letterIterator.next();
+                if (text.charAt(i) == ' ') {
+
+                    decipherText.append(' ');
+                    break;
+
+                }
+
+                else if (text.charAt(i) == Character.toUpperCase(text.charAt(i)) &&
+                         Character.toLowerCase(text.charAt(i)) == caesarCipher.get(l).letter) {
+
+                    decipherText.append(Character.toUpperCase(l.letter));
+
+                }
+
+                else if (text.charAt(i) == caesarCipher.get(l).letter) {
+
+                    decipherText.append(l.letter);
+
+                }
+
+            }
+
+        }
+
+        return decipherText.toString();
+
+    }
+
     public static void main(String[] args) {
 
         String text = "Hello World";
-        int shift = -1;
+        int shift = -5;
 
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         HashMap<Letter, Letter> cipher = new HashMap<>();
-        HashMap<Letter, Letter> decipher = new HashMap<>();
-
         for (int i = 0; i < alphabet.length(); i++) {
 
             while (shift < 0) {
@@ -53,17 +89,12 @@ public class Main {
             cipher.put(new Letter(alphabet.charAt(i)), new Letter(alphabet.charAt((i + shift) % 26)));
 
         }
-        for (int i = 0; i < alphabet.length(); i++) {
-
-            decipher.put(new Letter(alphabet.charAt((i + shift) % 26)), new Letter(alphabet.charAt(i)));
-
-        }
 
         String cipherText = cipher(cipher, text);
         System.out.println(text);
         System.out.println(cipherText);
 
-        String decipherText = cipher(decipher, cipherText);
+        String decipherText = decipher(cipher, cipherText);
         System.out.println(text);
         System.out.println(decipherText);
 
