@@ -93,12 +93,11 @@ public class Main {
         }
 
         String cipherText = cipher(cipher, text);
-        System.out.println(text);
-        System.out.println(cipherText);
+        System.out.println("Original: " + text);
+        System.out.println("Ciphered: " + cipherText);
 
         String decipherText = decipher(cipher, cipherText);
-        System.out.println(text);
-        System.out.println(decipherText);
+        System.out.println("Deciphered: " + decipherText);
 
     }
 
